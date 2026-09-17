@@ -24,5 +24,15 @@ pipeline {
             }
         }
 
+        stage('Deploy to Tomcat') {
+            steps {
+                sh '''
+                    ssh -i /var/lib/jenkins/.ssh/id_ed25519 \
+                    tomcat@172.31.26.129 \
+                    'cp /tmp/war-learning.war /opt/tomcat/current/webapps/'
+                '''
+            }
+        }
+
     }
 }
